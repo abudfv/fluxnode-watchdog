@@ -8,7 +8,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 
 sleep.sleep(15);
-console.log('Watchdog v6.0.9 Starting...');
+console.log('Watchdog v6.0.10 Starting...');
 console.log('=================================================================');
 
 const path = 'config.js';
@@ -948,7 +948,8 @@ if (config.zelflux_update == "1") {
        console.log('Local version: '+zelflux_local_version.trim());
        console.log('Remote version: '+zelflux_remote_version.trim());
        console.log('=================================================================');
-       shell.exec("cd /home/$USER/zelflux && git pull",{ silent: true }).stdout;
+       //shell.exec("cd /home/$USER/zelflux && git pull",{ silent: true }).stdout;
+       shell.exec("cd /home/$USER/zelflux && git checkout . && git checkout master && git reset && git pull",{ silent: true }).stdout;
        var zelflux_lv = shell.exec("jq -r '.version' /home/$USER/zelflux/package.json",{ silent: true }).stdout;
        if ( zelflux_remote_version.trim() == zelflux_lv.trim() ) {
 
