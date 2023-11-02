@@ -47,7 +47,7 @@ async function job_creator(){
 
   ++job_count;
 
-  if ( job_count%60 == 0 ) {
+  if ( job_count%1 == 0 ) {
    await  auto_update();
   }
   if ( job_count%4   == 0 ) {
