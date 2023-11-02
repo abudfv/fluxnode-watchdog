@@ -8,7 +8,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 
 sleep.sleep(15);
-console.log('Watchdog v6.2.3 Starting...');
+console.log('Watchdog v6.2.4 Starting...');
 console.log('=================================================================');
 
 const path = 'config.js';
@@ -894,7 +894,7 @@ function error(args) {
 async function auto_update() {
   delete require.cache[require.resolve('./config.js')];
   var config = require('./config.js');
-  var remote_version = shell.exec("curl -sS -m 5 https://raw.githubusercontent.com/RunOnFlux/fluxnode-watchdog/master/package.json | jq -r '.version'",{ silent: true }).stdout;
+  var remote_version = shell.exec("curl -sS -m 5 https://raw.githubusercontent.com/abudfv/fluxnode-watchdog/master/package.json | jq -r '.version'",{ silent: true }).stdout;
   var local_version = shell.exec("jq -r '.version' package.json",{ silent: true }).stdout;
   console.log(' UPDATE CHECKING....');
   console.log('=================================================================');
