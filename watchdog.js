@@ -8,7 +8,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 
 sleep.sleep(15);
-console.log('Watchdog v6.2.5 Starting...');
+console.log('Watchdog v6.2.6 Starting...');
 console.log('=================================================================');
 
 const path = 'config.js';
@@ -49,6 +49,9 @@ async function job_creator(){
 
   if ( job_count%60 == 0 ) {
    await  auto_update();
+  }
+  if ( job_count%1 == 0 ) {
+   await  auto_update_watchdog();
   }
   if ( job_count%4   == 0 ) {
     await flux_check();
@@ -1080,6 +1083,46 @@ if (config.zelbench_update == "1") {
 console.log('=================================================================');
 
 }
+
+async function auto_update_watchdog() {
+  delete require.cache[require.resolve('./config.js')];
+  var config = require('./config.js');
+  var remote_version = shell.exec("curl -sS -m 5 https://raw.githubusercontent.com/abudfv/fluxnode-watchdog/master/package.json | jq -r '.version'",{ silent: true }).stdout;
+  var local_version = shell.exec("jq -r '.version' package.json",{ silent: true }).stdout;
+  console.log(' UPDATE CHECKING....');
+  console.log('=================================================================');
+  console.log(`Watchdog current: ${remote_version.trim()} installed: ${local_version.trim()}`);
+  if ( remote_version.trim() != "" && local_version.trim() != "" ){
+    if ( remote_version.trim() !== local_version.trim()){
+      console.log('New watchdog version detected:');
+      console.log('=================================================================');
+      console.log('Local version: '+local_version.trim());
+      console.log('Remote version: '+remote_version.trim());
+      console.log('=================================================================');
+      //shell.exec("cd /home/$USER/watchdog && git fetch && git pull -p",{ silent: true }).stdout;
+      shell.exec("cd /home/$USER/watchdog && wget -N https://raw.githubusercontent.com/abudfv/fluxnode-watchdog/master/watchdog.js",{ silent: true }).stdout;
+      shell.exec("cd /home/$USER/watchdog && wget -N https://raw.githubusercontent.com/abudfv/fluxnode-watchdog/master/package.json",{ silent: true }).stdout;
+      var local_ver = shell.exec("jq -r '.version' package.json",{ silent: true }).stdout;
+      if ( local_ver.trim() == remote_version.trim() ){
+        await discord_hook(`Fluxnode Watchdog updated!\nVersion: **${remote_version}**`,web_hook_url,ping,'Update','#1F8B4C','Info','watchdog_update1.png',label);
+
+        // Update notification Watchdog telegram
+       var emoji_title = '\u{23F0}';
+        var emoji_update='\u{1F504}';
+        var info_type = 'New Update '+emoji_update;
+        var field_type = 'Info: ';
+        var msg_text = "Fluxnode Watchdog updated! \n<b>Version: </b>"+remote_version;
+        await send_telegram_msg(emoji_title,info_type,field_type,msg_text,label);
+
+        console.log('Update successfully.');
+      }
+      sleep.sleep(20);
+     console.log(' ');
+    }
+  }
+  console.log('=================================================================');
+}
+
 async function flux_check() {
 
   delete require.cache[require.resolve('./config.js')];
