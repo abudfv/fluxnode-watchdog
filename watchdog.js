@@ -8,7 +8,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 
 sleep.sleep(15);
-console.log('Watchdog v6.2.4 Starting...');
+console.log('Watchdog v6.2.5 Starting...');
 console.log('=================================================================');
 
 const path = 'config.js';
