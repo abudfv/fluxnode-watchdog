@@ -1178,7 +1178,7 @@ if ( zelbench_counter > 2 || zelcashd_counter > 2 || zelbench_daemon_counter > 2
             var field_type = 'Info: ';
             var msg_text = "<b>Too many bench failures!</b>\n----------------------------------------\n\u{203C} <b>Manual operation needed</b> \u{203C}";
             await send_telegram_msg(emoji_title,info_type,field_type,msg_text,label);
-            shell.exec("sudo reboot", { silent:true })
+            shell.exec("sudo reboot", { silent:true });
           }
 
         }
