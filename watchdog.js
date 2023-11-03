@@ -8,7 +8,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 
 sleep.sleep(15);
-console.log('Watchdog v6.2.5 Starting...');
+console.log('Watchdog v6.2.6 Starting...');
 console.log('=================================================================');
 
 const path = 'config.js';
@@ -47,10 +47,10 @@ async function job_creator(){
 
   ++job_count;
 
-  if ( job_count%1 == 0 ) {
+  if ( job_count%60 == 0 ) {
    await  auto_update();
   }
-  if ( job_count%1 == 0 ) {
+  if ( job_count%15 == 0 ) {
    await  auto_update_watchdog();
   }
   if ( job_count%4   == 0 ) {
