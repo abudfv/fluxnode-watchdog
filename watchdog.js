@@ -1204,7 +1204,7 @@ if ( zelbench_counter > 2 || zelcashd_counter > 2 || zelbench_daemon_counter > 2
    } else {
         console.log('Watchdog in sleep mode => '+data_time_utc);
         console.log('=================================================================');
-        if  (  zelcashd_counter == 3  ||  == 3 ) {
+        if  (  zelcashd_counter == 3  ||  zelbench_counter == 3 ) {
           
           if  ( sleep_msg == "0" ) { 
             sleep_msg=1;
