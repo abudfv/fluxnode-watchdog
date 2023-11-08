@@ -1197,7 +1197,7 @@ if ( zelbench_counter > 2 || zelcashd_counter > 2 || zelbench_daemon_counter > 2
 
    if (typeof zelcash_check !== "undefined" && zelbench_benchmark_status != "toaster" && zelbench_benchmark_status != "failed"  && typeof zelbench_benchmark_status !== "undefined"){
           zelcashd_counter=0;
-          =0;
+          zelbench_counter=0;
           zelbench_daemon_counter=0;
           watchdog_sleep="N/A"
           sleep_msg=0;
