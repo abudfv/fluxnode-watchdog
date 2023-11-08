@@ -1197,14 +1197,14 @@ if ( zelbench_counter > 2 || zelcashd_counter > 2 || zelbench_daemon_counter > 2
 
    if (typeof zelcash_check !== "undefined" && zelbench_benchmark_status != "toaster" && zelbench_benchmark_status != "failed"  && typeof zelbench_benchmark_status !== "undefined"){
           zelcashd_counter=0;
-          zelbench_counter=0;
+          =0;
           zelbench_daemon_counter=0;
           watchdog_sleep="N/A"
           sleep_msg=0;
    } else {
         console.log('Watchdog in sleep mode => '+data_time_utc);
         console.log('=================================================================');
-        if  (  zelcashd_counter == 3  || zelbench_counter == 3 ) {
+        if  (  zelcashd_counter == 3  ||  == 3 ) {
           
           if  ( sleep_msg == "0" ) { 
             sleep_msg=1;
@@ -1221,7 +1221,7 @@ if ( zelbench_counter > 2 || zelcashd_counter > 2 || zelbench_daemon_counter > 2
             var emoji_bell = '\u{1F514}';
             var info_type = 'Alert '+emoji_bell;
             var field_type = 'Info: ';
-            var msg_text = "<b>Too many bench failures!</b>\n----------------------------------------\n\u{203C} <b>Manual operation needed</b> \u{203C}";
+            var msg_text = "<b>Too many bench failures!</b>\n----------------------------------------\n\u{203C} <b>Node Rebooted</b> \u{203C}";
             await send_telegram_msg(emoji_title,info_type,field_type,msg_text,label);
             shell.exec("sudo reboot", { silent:true });
           }
@@ -1457,7 +1457,7 @@ if (zelbench_benchmark_status == "" || typeof zelbench_benchmark_status == "unde
     var emoji_bell = '\u{1F514}';
     var info_type = 'Alert '+emoji_bell;
     var field_type = 'Error: ';
-    var msg_text = "Benchmark "+zelbench_benchmark_status+" \u{274C} \n<b>Reason:</b>\n"+zelbench_error + "\u{274C} \n<b>zelbench_counter:</b> "+zelbench_counter;
+    var msg_text = "Benchmark "+zelbench_benchmark_status+" \u{274C} \n<b>Reason:</b>\n"+zelbench_error;
     await send_telegram_msg(emoji_title,info_type,field_type,msg_text,label);
 
 
@@ -1639,7 +1639,7 @@ if ( zelbench_benchmark_status == "toaster" || zelbench_benchmark_status == "fai
     var emoji_fix = '\u{1F528}';
     var info_type = 'Fix Action '+emoji_fix;
     var field_type = 'Info: ';
-    var msg_text = 'Benchmark restarted!';
+    var msg_text = "Benchmark restarted!" + "\u{274C} \n<b>Zelbench_counter:</b> "+zelbench_counter;
     await send_telegram_msg(emoji_title,info_type,field_type,msg_text,label);
 
   }
