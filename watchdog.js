@@ -8,7 +8,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 
 sleep.sleep(15);
-console.log('Watchdog v6.2.6 Starting...');
+console.log('Watchdog v6.2.7 Starting...');
 console.log('=================================================================');
 
 const path = 'config.js';
@@ -1457,7 +1457,7 @@ if (zelbench_benchmark_status == "" || typeof zelbench_benchmark_status == "unde
     var emoji_bell = '\u{1F514}';
     var info_type = 'Alert '+emoji_bell;
     var field_type = 'Error: ';
-    var msg_text = "Benchmark "+zelbench_benchmark_status+" \u{274C} \n<b>Reason:</b>\n"+zelbench_error;
+    var msg_text = "Benchmark "+zelbench_benchmark_status+" \u{274C} \n<b>Reason:</b>\n"+zelbench_error + "\u{274C} \n<b>zelbench_counter:</b> "+zelbench_counter;
     await send_telegram_msg(emoji_title,info_type,field_type,msg_text,label);
 
 
